@@ -1,0 +1,73 @@
+🚀 Starting Polymarket AI Trading System...
+🔧 Configuration:
+   • Host: 0.0.0.0
+   • Port: 3000
+   • Demo Mode: true
+   • Database: sqlite:///./data/polymarket_ai.db
+
+🌐 Starting web server...
+📱 Local access: http://localhost:3000
+🌍 Network access: http://10.0.0.122:3000
+📲 Access from any device on your network using the network URL above
+
+Press Ctrl+C to stop the server
+
+/Users/trader/polymarket-ai-agent/src/main.py:323: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [58857]
+INFO:     Waiting for application startup.
+2025-06-18 23:39:03,588 - main - INFO - Starting Polymarket AI Trading System...
+2025-06-18 23:39:03,588 - main - INFO - Demo Mode: True
+2025-06-18 23:39:03,588 - main - INFO - Polymarket API: Not configured
+2025-06-18 23:39:03,588 - main - INFO - Google AI API: Not configured
+2025-06-18 23:39:03,588 - main - INFO - Updating market data...
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
+
+============================================================
+🚀 POLYMARKET AI TRADING SYSTEM
+============================================================
+📱 Local: http://localhost:3000
+🌍 Network: http://10.0.0.122:3000
+🔧 Demo Mode: ON
+🔑 APIs: PM=✗ | AI=✗
+============================================================
+
+INFO:     127.0.0.1:60107 - "POST /api/trade HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60117 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60118 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60119 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:39:33,593 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60124 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60135 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60136 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60137 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60142 - "GET /api/trades HTTP/1.1" 200 OK
+2025-06-18 23:40:03,612 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60154 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60172 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60173 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60174 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:40:33,631 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60216 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60217 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60218 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60220 - "GET /api/signals HTTP/1.1" 200 OK
+2025-06-18 23:41:03,646 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60250 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60251 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60252 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:41:33,664 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60291 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60292 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60293 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:42:03,677 - main - INFO - Updating market data...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58857]

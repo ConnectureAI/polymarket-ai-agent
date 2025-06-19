@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymarket AI Trading System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .pulse-dot { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .status-indicator { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        .status-online { background-color: #10b981; }
+        .status-demo { background-color: #f59e0b; }
+        .status-offline { background-color: #ef4444; }
+        .chart-container { position: relative; height: 300px; }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="dashboardApp()">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center">
+                    <h1 class="text-3xl font-bold text-white">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        Polymarket AI
+                    </h1>
+                    <div class="ml-4 flex items-center">
+                        <span class="status-indicator" :class="getStatusClass()"></span>
+                        <span class="text-white text-sm" x-text="getStatusText()"></span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-white text-right">
+                        <div class="text-sm opacity-90">Balance</div>
+                        <div class="text-xl font-bold" x-text="formatCurrency(portfolio.balance)"></div>
+                    </div>
+                    <div class="text-white text-right">
+                        <div class="text-sm opacity-90">P&L</div>
+                        <div class="text-xl font-bold" :class="portfolio.stats.total_pnl >= 0 ? 'text-green-300' : 'text-red-300'" x-text="formatCurrency(portfolio.stats.total_pnl)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-md p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Open Positions</p>
+                        <p class="text-2xl font-bold text-gray-900" x-text="portfolio.stats.open_positions"></p>
+                    </div>
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <i class="fas fa-chart-pie text-blue-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Trades</p>
+                        <p class="text-2xl font-bold text-gray-900" x-text="portfolio.stats.total_trades"></p>
+                    </div>
+                    <div class="p-3 bg-green-100 rounded-full">
+                        <i class="fas fa-exchange-alt text-green-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Win Rate</p>
+                        <p class="text-2xl font-bold text-gray-900" x-text="portfolio.stats.win_rate.toFixed(1) + '%'"></p>
+                    </div>
+                    <div class="p-3 bg-purple-100 rounded-full">
+                        <i class="fas fa-trophy text-purple-600"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 card-hover transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Active Markets</p>
+                        <p class="text-2xl font-bold text-gray-900" x-text="markets.length"></p>
+                    </div>
+                    <div class="p-3 bg-yellow-100 rounded-full">
+                        <i class="fas fa-market text-yellow-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Markets Panel -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-900">
+                            <i class="fas fa-chart-bar mr-2"></i>
+                            Live Markets
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <button @click="refreshMarkets()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition-colors">
+                                <i class="fas fa-sync-alt mr-1" :class="{'fa-spin': loading}"></i>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 max-h-96 overflow-y-auto">
+                        <template x-for="market in markets" :key="market.id">
+                            <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer transition-colors" @click="selectMarket(market)">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex-1">
+                                        <h3 class="font-semibold text-gray-900 mb-2" x-text="market.question"></h3>
+                                        <div class="flex items-center text-sm text-gray-600 space-x-4">
+                                            <span>
+                                                <i class="fas fa-tag mr-1"></i>
+                                                <span x-text="market.category"></span>
+                                            </span>
+                                            <span>
+                                                <i class="fas fa-dollar-sign mr-1"></i>
+                                                <span x-text="formatNumber(market.volume)"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-bold text-green-600" x-text="(market.yes_price * 100).toFixed(1) + '%'"></div>
+                                        <div class="text-xs text-gray-500">YES</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trading Signals Panel -->
+            <div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-900 mb-6">
+                        <i class="fas fa-signal mr-2"></i>
+                        Trading Signals
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <template x-for="signal in signals" :key="signal.market_id">
+                            <div class="border rounded-lg p-4" :class="signal.confidence > 0.7 ? 'border-green-200 bg-green-50' : 'border-yellow-200 bg-yellow-50'">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-sm font-medium" :class="signal.side === 'yes' ? 'text-green-600' : 'text-red-600'" x-text="signal.side.toUpperCase()"></span>
+                                    <span class="text-xs bg-gray-200 px-2 py-1 rounded" x-text="(signal.confidence * 100).toFixed(0) + '%'"></span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2" x-text="signal.reasoning.substring(0, 100) + '...'"></p>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>Size: $<span x-text="signal.recommended_size.toFixed(0)"></span></span>
+                                    <span>Price: <span x-text="signal.entry_price.toFixed(3)"></span></span>
+                                </div>
+                                <button @click="executeTrade(signal)" class="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs transition-colors">
+                                    Execute Trade
+                                </button>
+                            </div>
+                        </template>
+                        
+                        <div x-show="signals.length === 0" class="text-center text-gray-500 py-8">
+                            <i class="fas fa-search text-2xl mb-2"></i>
+                            <p>No signals generated yet</p>
+                            <button @click="generateSignals()" class="mt-2 text-blue-500 hover:text-blue-600 text-sm">
+                                Generate Signals
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Positions and Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+            <!-- Current Positions -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-wallet mr-2"></i>
+                    Current Positions
+                </h2>
+                
+                <div class="space-y-4">
+                    <template x-for="position in positions" :key="position.id">
+                        <div class="border rounded-lg p-4">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-gray-900" x-text="position.question"></h4>
+                                    <div class="flex items-center text-sm text-gray-600 mt-1">
+                                        <span class="px-2 py-1 rounded text-xs" :class="position.side === 'yes' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" x-text="position.side.toUpperCase()"></span>
+                                        <span class="ml-2">Size: $<span x-text="position.size.toFixed(0)"></span></span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold" :class="position.pnl >= 0 ? 'text-green-600' : 'text-red-600'" x-text="formatCurrency(position.pnl)"></div>
+                                    <div class="text-xs text-gray-500">P&L</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <div x-show="positions.length === 0" class="text-center text-gray-500 py-8">
+                        <i class="fas fa-chart-line text-2xl mb-2"></i>
+                        <p>No open positions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- P&L Chart -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">
+                    <i class="fas fa-chart-area mr-2"></i>
+                    Portfolio Performance
+                </h2>
+                <div class="chart-container">
+                    <canvas id="pnlChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Trades -->
+        <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-6">
+                <i class="fas fa-history mr-2"></i>
+                Recent Trades
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Market</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Side</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <template x-for="trade in trades" :key="trade.id">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" x-text="trade.question?.substring(0, 50) + '...'"></td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded" :class="trade.side === 'yes' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'" x-text="trade.side.toUpperCase()"></span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" x-text="'$' + trade.size.toFixed(0)"></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" x-text="trade.price.toFixed(3)"></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="formatDateTime(trade.timestamp)"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                
+                <div x-show="trades.length === 0" class="text-center text-gray-500 py-8">
+                    <i class="fas fa-history text-2xl mb-2"></i>
+                    <p>No trades yet</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Market Detail Modal -->
+    <div x-show="selectedMarket" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" @click="selectedMarket = null">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white" @click.stop>
+            <div class="mt-3">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-lg font-bold text-gray-900" x-text="selectedMarket?.question"></h3>
+                    <button @click="selectedMarket = null" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div x-show="selectedMarket" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600" x-text="((selectedMarket?.yes_price || 0) * 100).toFixed(1) + '%'"></div>
+                                <div class="text-sm text-gray-600">YES</div>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-red-600" x-text="((selectedMarket?.no_price || 0) * 100).toFixed(1) + '%'"></div>
+                                <div class="text-sm text-gray-600">NO</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-600">Volume:</span>
+                            <span class="font-medium ml-2" x-text="formatNumber(selectedMarket?.volume || 0)"></span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Category:</span>
+                            <span class="font-medium ml-2" x-text="selectedMarket?.category"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4">
+                        <button @click="openTradeModal('yes')" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition-colors">
+                            Buy YES
+                        </button>
+                        <button @click="openTradeModal('no')" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded transition-colors">
+                            Buy NO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function dashboardApp() {
+            return {
+                loading: false,
+                markets: [],
+                positions: [],
+                trades: [],
+                signals: [],
+                portfolio: {
+                    balance: 0,
+                    stats: {
+                        total_pnl: 0,
+                        open_positions: 0,
+                        total_trades: 0,
+                        win_rate: 0
+                    }
+                },
+                selectedMarket: null,
+                websocket: null,
+                demoMode: {{ demo_mode | tojson }},
+                hasPolymarketApi: {{ has_polymarket_api | tojson }},
+                hasGoogleApi: {{ has_google_api | tojson }},
+
+                init() {
+                    this.loadInitialData();
+                    this.initWebSocket();
+                    this.initChart();
+                    setInterval(() => this.refreshData(), 30000); // Refresh every 30 seconds
+                },
+
+                async loadInitialData() {
+                    await Promise.all([
+                        this.refreshMarkets(),
+                        this.refreshPositions(),
+                        this.refreshTrades(),
+                        this.refreshPortfolio(),
+                        this.generateSignals()
+                    ]);
+                },
+
+                async refreshMarkets() {
+                    this.loading = true;
+                    try {
+                        const response = await fetch('/api/markets');
+                        const data = await response.json();
+                        this.markets = data.markets;
+                    } catch (error) {
+                        console.error('Error fetching markets:', error);
+                    }
+                    this.loading = false;
+                },
+
+                async refreshPositions() {
+                    try {
+                        const response = await fetch('/api/positions');
+                        const data = await response.json();
+                        this.positions = data.positions;
+                    } catch (error) {
+                        console.error('Error fetching positions:', error);
+                    }
+                },
+
+                async refreshTrades() {
+                    try {
+                        const response = await fetch('/api/trades');
+                        const data = await response.json();
+                        this.trades = data.trades;
+                    } catch (error) {
+                        console.error('Error fetching trades:', error);
+                    }
+                },
+
+                async refreshPortfolio() {
+                    try {
+                        const response = await fetch('/api/portfolio');
+                        const data = await response.json();
+                        this.portfolio = data;
+                    } catch (error) {
+                        console.error('Error fetching portfolio:', error);
+                    }
+                },
+
+                async generateSignals() {
+                    try {
+                        const response = await fetch('/api/signals');
+                        const data = await response.json();
+                        this.signals = data.signals;
+                    } catch (error) {
+                        console.error('Error generating signals:', error);
+                    }
+                },
+
+                async executeTrade(signal) {
+                    if (!confirm(`Execute ${signal.side.toUpperCase()} trade for $${signal.recommended_size}?`)) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch('/api/trade', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                market_id: signal.market_id,
+                                side: signal.side,
+                                size: signal.recommended_size,
+                                price: signal.entry_price
+                            })
+                        });
+
+                        const result = await response.json();
+                        if (response.ok && result.success) {
+                            alert('Trade executed successfully!');
+                            this.refreshData();
+                        } else {
+                            // Handle error response
+                            const errorMsg = result.detail || result.error || 'Unknown error';
+                            alert('Trade failed: ' + errorMsg);
+                        }
+                    } catch (error) {
+                        console.error('Error executing trade:', error);
+                        alert('Error executing trade');
+                    }
+                },
+
+                selectMarket(market) {
+                    this.selectedMarket = market;
+                },
+
+                openTradeModal(side) {
+                    // Implementation for manual trading
+                    const size = prompt(`Enter position size for ${side.toUpperCase()}:`);
+                    if (size && this.selectedMarket) {
+                        this.executeTrade({
+                            market_id: this.selectedMarket.id,
+                            side: side,
+                            recommended_size: parseFloat(size),
+                            entry_price: side === 'yes' ? this.selectedMarket.yes_price : this.selectedMarket.no_price
+                        });
+                    }
+                },
+
+                async refreshData() {
+                    await Promise.all([
+                        this.refreshMarkets(),
+                        this.refreshPositions(),
+                        this.refreshPortfolio()
+                    ]);
+                },
+
+                initWebSocket() {
+                    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                    this.websocket = new WebSocket(`${protocol}//${window.location.host}/ws`);
+                    
+                    this.websocket.onmessage = (event) => {
+                        const data = JSON.parse(event.data);
+                        if (data.type === 'market_update') {
+                            this.markets = data.data.markets;
+                        }
+                    };
+                },
+
+                initChart() {
+                    const ctx = document.getElementById('pnlChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'P&L',
+                                data: [0, 150, -200, 400, 300, this.portfolio.stats.total_pnl],
+                                borderColor: 'rgb(59, 130, 246)',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: (value) => '$' + value
+                                    }
+                                }
+                            }
+                        }
+                    });
+                },
+
+                getStatusClass() {
+                    if (this.demoMode) return 'status-demo pulse-dot';
+                    return this.hasPolymarketApi ? 'status-online' : 'status-offline';
+                },
+
+                getStatusText() {
+                    if (this.demoMode) return 'Demo Mode';
+                    return this.hasPolymarketApi ? 'Live Trading' : 'Offline';
+                },
+
+                formatCurrency(amount) {
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    }).format(amount);
+                },
+
+                formatNumber(num) {
+                    return new Intl.NumberFormat('en-US', {
+                        notation: 'compact',
+                        maximumFractionDigits: 1
+                    }).format(num);
+                },
+
+                formatDateTime(dateString) {
+                    return new Date(dateString).toLocaleDateString();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

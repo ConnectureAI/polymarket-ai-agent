@@ -1,0 +1,254 @@
+/* Additional custom styles for the dashboard */
+
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.pulse-dot {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-online {
+    background-color: #10b981;
+}
+
+.status-demo {
+    background-color: #f59e0b;
+}
+
+.status-offline {
+    background-color: #ef4444;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .card-hover {
+        transform: none;
+    }
+    
+    .card-hover:hover {
+        transform: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Custom scrollbar */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Loading animation */
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+/* Signal confidence indicators */
+.signal-high {
+    border-left: 4px solid #10b981;
+}
+
+.signal-medium {
+    border-left: 4px solid #f59e0b;
+}
+
+.signal-low {
+    border-left: 4px solid #ef4444;
+}
+
+/* Trade execution button states */
+.btn-execute {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    transition: all 0.3s ease;
+}
+
+.btn-execute:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+    transform: translateY(-1px);
+}
+
+.btn-execute:active {
+    transform: translateY(0);
+}
+
+/* Market category badges */
+.category-politics {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.category-crypto {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.category-technology {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.category-sports {
+    background-color: #fce7f3;
+    color: #be185d;
+}
+
+.category-economics {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+/* Position P&L indicators */
+.pnl-positive {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.pnl-negative {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+.pnl-neutral {
+    color: #6b7280;
+    font-weight: 400;
+}
+
+/* Modal backdrop blur effect */
+.modal-backdrop {
+    backdrop-filter: blur(4px);
+}
+
+/* Real-time update indicator */
+.update-indicator {
+    position: relative;
+}
+
+.update-indicator::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* Risk level indicators */
+.risk-low {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.risk-medium {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.risk-high {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Chart tooltip styling */
+.chartjs-tooltip {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Table hover effects */
+.table-row:hover {
+    background-color: #f9fafb;
+}
+
+/* Connection status animation */
+.connection-indicator {
+    display: inline-flex;
+    align-items: center;
+}
+
+.connection-indicator .pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Error state styling */
+.error-state {
+    color: #ef4444;
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+}
+
+/* Success state styling */
+.success-state {
+    color: #065f46;
+    background-color: #d1fae5;
+    border: 1px solid #a7f3d0;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+}

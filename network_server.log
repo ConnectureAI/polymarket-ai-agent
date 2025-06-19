@@ -1,0 +1,243 @@
+🚀 Starting Polymarket AI Trading System...
+🔧 Configuration:
+   • Host: 0.0.0.0
+   • Port: 3000
+   • Demo Mode: true
+   • Database: sqlite:///./data/polymarket_ai.db
+
+🌐 Starting web server...
+📱 Local access: http://localhost:3000
+🌍 Network access: http://10.0.0.122:3000
+📲 Access from any device on your network using the network URL above
+
+Press Ctrl+C to stop the server
+
+/Users/trader/polymarket-ai-agent/src/main.py:313: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [57700]
+INFO:     Waiting for application startup.
+2025-06-18 23:21:55,490 - main - INFO - Starting Polymarket AI Trading System...
+2025-06-18 23:21:55,490 - main - INFO - Demo Mode: True
+2025-06-18 23:21:55,490 - main - INFO - Polymarket API: Not configured
+2025-06-18 23:21:55,490 - main - INFO - Google AI API: Not configured
+2025-06-18 23:21:55,490 - main - INFO - Updating market data...
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
+
+============================================================
+🚀 POLYMARKET AI TRADING SYSTEM
+============================================================
+📱 Local: http://localhost:3000
+🌍 Network: http://10.0.0.122:3000
+🔧 Demo Mode: ON
+🔑 APIs: PM=✗ | AI=✗
+============================================================
+
+INFO:     10.0.0.134:61667 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61667 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     10.0.0.134:61666 - "GET / HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61666 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61668 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     ('10.0.0.134', 61681) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     10.0.0.134:61684 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61683 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61682 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:22:25,497 - main - INFO - Updating market data...
+INFO:     10.0.0.134:61689 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61689 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61689 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61689 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61698 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61697 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61696 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:22:55,512 - main - INFO - Updating market data...
+INFO:     10.0.0.164:59635 - "GET / HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59634 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59635 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59636 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59637 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     ('10.0.0.164', 59639) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     10.0.0.164:59638 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61729 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61731 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61730 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:23:25,527 - main - INFO - Updating market data...
+INFO:     10.0.0.164:59641 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59642 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59643 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61743 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61742 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61744 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:23:55,542 - main - INFO - Updating market data...
+INFO:     10.0.0.164:59646 - "GET / HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59645 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59646 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     ('10.0.0.164', 59650) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     10.0.0.164:59649 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59647 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59648 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59645 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59646 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59647 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59651 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61753 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61752 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61754 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.122:59870 - "GET /api/markets HTTP/1.1" 200 OK
+2025-06-18 23:24:25,556 - main - INFO - Updating market data...
+INFO:     10.0.0.164:59652 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59653 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59654 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59652 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59653 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.164:59654 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:59883 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61785 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61784 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61783 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:24:55,572 - main - INFO - Updating market data...
+INFO:     10.0.0.134:61808 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61809 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61810 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:25:25,582 - main - INFO - Updating market data...
+INFO:     10.0.0.134:61811 - "POST /api/trade HTTP/1.1" 404 Not Found
+INFO:     10.0.0.134:61823 - "POST /api/trade HTTP/1.1" 404 Not Found
+INFO:     10.0.0.134:61823 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61824 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61825 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:25:55,597 - main - INFO - Updating market data...
+INFO:     10.0.0.88:54198 - "GET / HTTP/1.1" 200 OK
+INFO:     10.0.0.88:54198 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.88:54206 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.88:54234 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     ('10.0.0.88', 54242) - "WebSocket /ws" [accepted]
+INFO:     10.0.0.88:54248 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     connection open
+INFO:     10.0.0.88:54222 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     10.0.0.88:54224 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     10.0.0.134:61872 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61871 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61873 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:26:25,614 - main - INFO - Updating market data...
+2025-06-18 23:26:55,629 - main - INFO - Updating market data...
+2025-06-18 23:27:25,642 - main - INFO - Updating market data...
+INFO:     10.0.0.134:61955 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61954 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:61953 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:27:55,654 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62047 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62051 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62052 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62052 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62052 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62053 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62055 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62054 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:28:25,671 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62069 - "POST /api/trade HTTP/1.1" 404 Not Found
+2025-06-18 23:28:55,686 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62098 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62099 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62100 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:29:25,702 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62125 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62127 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62126 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:29:55,716 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62137 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62138 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62139 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:30:25,731 - main - INFO - Updating market data...
+INFO:     ('127.0.0.1', 59895) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59898 - "POST /api/trade HTTP/1.1" 404 Not Found
+2025-06-18 23:30:55,747 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59899 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59900 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59901 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:31:25,766 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62166 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62165 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62164 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59902 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59903 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59904 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62176 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62181 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     10.0.0.134:62182 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:31:55,783 - main - INFO - Updating market data...
+INFO:     10.0.0.134:62192 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     127.0.0.1:59906 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59907 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59908 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:32:25,793 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59909 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59910 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59911 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:32:55,808 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59912 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59913 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59914 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:33:25,818 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59915 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59916 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59917 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:33:55,832 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59919 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59920 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59921 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:34:25,845 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59922 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59923 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59924 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:34:55,860 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59925 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59926 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59927 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:35:25,875 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59928 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59929 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59930 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:35:55,893 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59931 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59932 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59933 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:36:25,914 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59936 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59937 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59938 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59964 - "POST /api/trade HTTP/1.1" 404 Not Found
+2025-06-18 23:36:55,937 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59974 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59975 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59976 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59986 - "GET /api/markets HTTP/1.1" 200 OK
+2025-06-18 23:37:25,953 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59999 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60000 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60001 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:37:55,971 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60023 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60024 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60025 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:38:25,985 - main - INFO - Updating market data...
+INFO:     127.0.0.1:60058 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60059 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60060 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57700]

@@ -1,0 +1,97 @@
+🚀 Starting Polymarket AI Trading System...
+🔧 Configuration:
+   • Host: 127.0.0.1
+   • Port: 3000
+   • Demo Mode: true
+   • Database: sqlite:///./data/polymarket_ai.db
+
+🌐 Starting web server...
+📱 Dashboard will be available at: http://127.0.0.1:3000
+
+Press Ctrl+C to stop the server
+
+/Users/trader/polymarket-ai-agent/src/main.py:313: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [56613]
+INFO:     Waiting for application startup.
+2025-06-18 23:08:26,952 - main - INFO - Starting Polymarket AI Trading System...
+2025-06-18 23:08:26,952 - main - INFO - Demo Mode: True
+2025-06-18 23:08:26,952 - main - INFO - Polymarket API: Not configured
+2025-06-18 23:08:26,952 - main - INFO - Google AI API: Not configured
+2025-06-18 23:08:26,952 - main - INFO - Updating market data...
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:3000 (Press CTRL+C to quit)
+2025-06-18 23:08:56,956 - main - INFO - Updating market data...
+2025-06-18 23:09:26,974 - main - INFO - Updating market data...
+
+============================================================
+🚀 POLYMARKET AI TRADING SYSTEM
+============================================================
+📱 Dashboard: http://127.0.0.1:3000
+🔧 Demo Mode: ON
+🔑 APIs: PM=✗ | AI=✗
+============================================================
+
+INFO:     127.0.0.1:59684 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59684 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 59692) - "WebSocket /ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:59685 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59689 - "GET /api/trades HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59691 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59690 - "GET /api/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59690 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+2025-06-18 23:09:56,986 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59694 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59695 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59696 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:10:27,001 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59697 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59698 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59699 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:10:57,018 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59700 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59701 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59702 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:11:27,033 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59704 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59705 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59706 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59707 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59708 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:11:57,047 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59710 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59711 - "GET /api/positions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59712 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:12:27,062 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59713 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     connection closed
+2025-06-18 23:12:57,077 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59721 - "GET /api/markets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59736 - "GET /api/portfolio HTTP/1.1" 200 OK
+2025-06-18 23:13:27,092 - main - INFO - Updating market data...
+INFO:     127.0.0.1:59752 - "GET /api/signals HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59764 - "GET / HTTP/1.1" 200 OK
+2025-06-18 23:13:57,100 - main - INFO - Updating market data...
+2025-06-18 23:14:27,112 - main - INFO - Updating market data...
+2025-06-18 23:14:57,129 - main - INFO - Updating market data...
+2025-06-18 23:15:27,144 - main - INFO - Updating market data...
+2025-06-18 23:15:57,157 - main - INFO - Updating market data...
+2025-06-18 23:16:27,170 - main - INFO - Updating market data...
+2025-06-18 23:16:57,184 - main - INFO - Updating market data...
+2025-06-18 23:17:27,199 - main - INFO - Updating market data...
+2025-06-18 23:17:57,213 - main - INFO - Updating market data...
+2025-06-18 23:18:27,228 - main - INFO - Updating market data...
+2025-06-18 23:18:57,242 - main - INFO - Updating market data...
+2025-06-18 23:19:27,257 - main - INFO - Updating market data...
+2025-06-18 23:19:57,274 - main - INFO - Updating market data...
+2025-06-18 23:20:27,289 - main - INFO - Updating market data...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [56613]
